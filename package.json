@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "prepare": "bob build",
+    "release": "release-it",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -28,6 +29,7 @@
     "react-native": "*"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^12.0.0",
     "@types/react": "^19.2.18",
     "eslint": "^9.39.5",
     "eslint-config-expo": "^57.0.2",
@@ -38,6 +40,7 @@
     "react": "^19.2.8",
     "react-native": "^0.87.1",
     "react-native-builder-bob": "^0.43.0",
+    "release-it": "^21.0.2",
     "typescript": "~5.9.2"
   },
   "react-native-builder-bob": {
@@ -57,5 +60,25 @@
         }
       ]
     ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        },
+        "infile": "CHANGELOG.md"
+      }
+    }
   }
 }
