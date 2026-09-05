@@ -1,4 +1,7 @@
 packages:
   - example
 
+allowBuilds:
+  unrs-resolver: true
+
 nodeLinker: hoisted
