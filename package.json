@@ -1,5 +1,21 @@
 {
   "name": "expo-image-comparison-slider",
   "version": "0.0.0",
-  "packageManager": "pnpm@11.8.0"
+  "packageManager": "pnpm@11.8.0",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "^57.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "typescript": "~5.9.2"
+  }
 }
