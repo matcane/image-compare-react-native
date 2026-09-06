@@ -16,5 +16,5 @@
     "verbatimModuleSyntax": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src"]
+  "include": ["src", "jest-env.d.ts", "jest.setup.ts"]
 }
