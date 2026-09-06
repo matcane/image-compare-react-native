@@ -1,12 +1,6 @@
-import { useCallback, useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  type ImageSourcePropType,
-  type StyleProp,
-  type ViewStyle,
-} from "react-native";
+import { Image, type ImageProps, type ImageSource } from "expo-image";
+import { useCallback, useState, type ReactNode } from "react";
+import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -20,14 +14,35 @@ import { clampInitialRatio } from "./utils";
 const HANDLE_KNOB = 40;
 const LINE_WIDTH = 3;
 
-interface Props {
-  before: ImageSourcePropType;
-  after: ImageSourcePropType;
+type PassThroughImageProps = Omit<ImageProps, "source" | "style" | "contentFit">;
+
+export interface ImageComparisonSliderProps {
+  before: ImageSource | number;
+  after: ImageSource | number;
   initialPosition?: number;
+  contentFit?: ImageProps["contentFit"];
+  enabled?: boolean;
+  borderRadius?: number;
   style?: StyleProp<ViewStyle>;
+  knobContent?: ReactNode;
+  renderLine?: ReactNode;
+  beforeImageProps?: PassThroughImageProps;
+  afterImageProps?: PassThroughImageProps;
 }
 
-export function ImageComparisonSlider({ before, after, initialPosition = 0.5, style }: Props) {
+export function ImageComparisonSlider({
+  before,
+  after,
+  initialPosition = 0.5,
+  enabled = true,
+  contentFit = "cover",
+  borderRadius,
+  style,
+  knobContent,
+  renderLine,
+  beforeImageProps,
+  afterImageProps,
+}: ImageComparisonSliderProps) {
   const [measuredWidth, setMeasuredWidth] = useState(0);
   const containerWidth = useSharedValue(0);
 
@@ -43,7 +58,7 @@ export function ImageComparisonSlider({ before, after, initialPosition = 0.5, st
 
   const splitRatio = useSharedValue(clampInitialRatio(initialPosition));
 
-  const pan = createSliderPan(containerWidth, splitRatio);
+  const pan = createSliderPan(containerWidth, splitRatio, enabled);
 
   const splitPx = useDerivedValue(() => splitRatio.get() * containerWidth.get());
 
@@ -56,24 +71,35 @@ export function ImageComparisonSlider({ before, after, initialPosition = 0.5, st
   return (
     <GestureDetector gesture={pan}>
       <View
-        style={[styles.root, style]}
+        style={[styles.root, style, { borderRadius, overflow: "visible" }]}
         onLayout={(e) => onLayoutWidth(e.nativeEvent.layout.width)}>
-        <Image source={after} resizeMode="cover" style={styles.fullImage} />
-
-        <Animated.View style={[styles.clip, clipStyle]}>
-          {measuredWidth > 0 && (
-            <Image
-              source={before}
-              resizeMode="cover"
-              style={[styles.leftImage, { width: measuredWidth }]}
-            />
+        <View style={[styles.media, { borderRadius }]}>
+          <Image
+            {...afterImageProps}
+            source={after}
+            contentFit={contentFit}
+            style={styles.fullImage}
+          />
+          {enabled && (
+            <Animated.View style={[styles.clip, clipStyle]}>
+              {measuredWidth > 0 && (
+                <Image
+                  {...beforeImageProps}
+                  source={before}
+                  contentFit={contentFit}
+                  style={[styles.leftImage, { width: measuredWidth }]}
+                />
+              )}
+            </Animated.View>
           )}
-        </Animated.View>
+        </View>
 
-        <Animated.View style={[styles.handleColumn, handleGroupStyle]} pointerEvents="none">
-          <View style={styles.line} />
-          <View style={styles.knob} />
-        </Animated.View>
+        {enabled && (
+          <Animated.View style={[styles.handleColumn, handleGroupStyle]} pointerEvents="none">
+            {renderLine ?? <View style={styles.line} />}
+            <View style={styles.knob}>{knobContent}</View>
+          </Animated.View>
+        )}
       </View>
     </GestureDetector>
   );
@@ -81,10 +107,11 @@ export function ImageComparisonSlider({ before, after, initialPosition = 0.5, st
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
     width: "100%",
+  },
+  media: {
+    ...StyleSheet.absoluteFill,
     overflow: "hidden",
-    backgroundColor: "#1a1a1a",
   },
   fullImage: {
     ...StyleSheet.absoluteFill,
@@ -115,18 +142,17 @@ const styles = StyleSheet.create({
   },
   line: {
     position: "absolute",
-    left: HANDLE_KNOB / 2 - LINE_WIDTH / 2,
     top: 0,
     bottom: 0,
     width: LINE_WIDTH,
+    alignSelf: "center",
     backgroundColor: "#ffffff",
   },
   knob: {
-    width: HANDLE_KNOB - 8,
-    height: HANDLE_KNOB - 8,
-    borderRadius: (HANDLE_KNOB - 8) / 2,
-    borderWidth: 2,
-    borderColor: "#ffffff",
+    width: HANDLE_KNOB,
+    height: HANDLE_KNOB,
+    borderRadius: HANDLE_KNOB / 2,
+    overflow: "hidden",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ffffff",
