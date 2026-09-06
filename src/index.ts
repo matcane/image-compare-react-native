@@ -1,1 +1,1 @@
-export {};
+export { ImageComparisonSlider } from "./ImageComparisonSlider";
