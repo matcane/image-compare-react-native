@@ -11,8 +11,10 @@ const EDGE_MARGIN = 8;
 export function createSliderPan(
   containerWidth: SharedValue<number>,
   splitRatio: SharedValue<number>,
+  enabled: boolean,
 ) {
   return Gesture.Pan()
+    .enabled(enabled)
     .activeOffsetX(PAN_ACTIVE_OFFSET_X)
     .failOffsetY(PAN_FAIL_OFFSET_Y)
     .onUpdate((e) => {

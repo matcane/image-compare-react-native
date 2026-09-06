@@ -9,7 +9,18 @@ export default function App() {
         <ImageComparisonSlider
           before={require("./assets/android-icon-background.png")}
           after={require("./assets/android-icon-foreground.png")}
-          style={{ flex: 0, width: 200, height: 300, borderRadius: 16 }}
+          borderRadius={16}
+          style={{ width: 200, height: 300, backgroundColor: "black" }}
+          knobContent={<View style={{ backgroundColor: "red", flex: 1, width: "100%" }} />}
+        />
+
+        <ImageComparisonSlider
+          before={require("./assets/android-icon-background.png")}
+          after={require("./assets/android-icon-foreground.png")}
+          borderRadius={16}
+          style={{ width: 200, height: 300, backgroundColor: "black" }}
+          knobContent={<View style={{ backgroundColor: "red", flex: 1, width: "100%" }} />}
+          enabled={false}
         />
       </View>
     </GestureHandlerRootView>
@@ -19,7 +30,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    gap: 16,
+    backgroundColor: "gray",
     alignItems: "center",
     justifyContent: "center",
   },

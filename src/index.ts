@@ -1,1 +1,1 @@
-export { ImageComparisonSlider } from "./ImageComparisonSlider";
+export { ImageComparisonSlider, type ImageComparisonSliderProps } from "./ImageComparisonSlider";
