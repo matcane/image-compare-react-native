@@ -1,11 +1,18 @@
-import "expo-image-comparison-slider";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageComparisonSlider } from "expo-image-comparison-slider";
+import { StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <GestureHandlerRootView>
+      <View style={styles.container}>
+        <ImageComparisonSlider
+          before={require("./assets/android-icon-background.png")}
+          after={require("./assets/android-icon-foreground.png")}
+          style={{ flex: 0, width: 200, height: 300, borderRadius: 16 }}
+        />
+      </View>
+    </GestureHandlerRootView>
   );
 }
 
