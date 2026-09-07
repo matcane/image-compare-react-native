@@ -1,12 +1,10 @@
 import { Gesture } from "react-native-gesture-handler";
 import type { SharedValue } from "react-native-reanimated";
 
-import { clampNextRatio } from "./utils";
+import { clampNextRatio, EDGE_MARGIN } from "./utils";
 
 const PAN_ACTIVE_OFFSET_X = [-0, 0] as [activeOffsetXStart: number, activeOffsetXEnd: number];
 const PAN_FAIL_OFFSET_Y = [-18, 18] as [failOffsetYStart: number, failOffsetYEnd: number];
-
-const EDGE_MARGIN = 8;
 
 export function createSliderPan(
   containerWidth: SharedValue<number>,

@@ -1,3 +1,5 @@
+export const EDGE_MARGIN = 8;
+
 export function clamp(value: number, min: number, max: number) {
   "worklet";
   return Math.min(Math.max(value, min), max);
@@ -11,4 +13,8 @@ export function clampInitialRatio(value: number) {
 export function clampNextRatio(touchX: number, width: number, margin: number) {
   "worklet";
   return clamp(touchX, margin, width - margin) / width;
+}
+
+export function ratioToPercent(ratio: number) {
+  return Math.round(ratio * 100);
 }

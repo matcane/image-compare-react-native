@@ -1,6 +1,12 @@
 import { Image, type ImageProps, type ImageSource } from "expo-image";
 import { useCallback, useState, type ReactNode } from "react";
-import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
+import {
+  StyleSheet,
+  View,
+  type AccessibilityActionEvent,
+  type StyleProp,
+  type ViewStyle,
+} from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -9,7 +15,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { createSliderPan } from "./createSliderPan";
-import { clampInitialRatio } from "./utils";
+import { clampInitialRatio, clampNextRatio, EDGE_MARGIN, ratioToPercent } from "./utils";
 
 const HANDLE_KNOB = 40;
 const LINE_WIDTH = 3;
@@ -46,6 +52,11 @@ export function ImageComparisonSlider({
   const [measuredWidth, setMeasuredWidth] = useState(0);
   const containerWidth = useSharedValue(0);
 
+  const initialRatio = clampInitialRatio(initialPosition);
+  const initialPercent = ratioToPercent(initialRatio);
+  const splitRatio = useSharedValue(initialRatio);
+  const [splitPercent, setSplitPercent] = useState(initialPercent);
+
   const onLayoutWidth = useCallback(
     (width: number) => {
       if (width <= 0) return;
@@ -56,7 +67,24 @@ export function ImageComparisonSlider({
     [containerWidth],
   );
 
-  const splitRatio = useSharedValue(clampInitialRatio(initialPosition));
+  const onAccessibilityAction = useCallback(
+    (event: AccessibilityActionEvent) => {
+      if (!enabled) return;
+
+      const { actionName } = event.nativeEvent;
+      if (actionName !== "increment" && actionName !== "decrement") return;
+
+      const nextRatio = clampNextRatio(
+        (splitRatio.get() + (actionName === "increment" ? 0.05 : -0.05)) * measuredWidth,
+        measuredWidth,
+        EDGE_MARGIN,
+      );
+
+      splitRatio.set(nextRatio);
+      setSplitPercent(ratioToPercent(nextRatio));
+    },
+    [enabled, measuredWidth, splitRatio],
+  );
 
   const pan = createSliderPan(containerWidth, splitRatio, enabled);
 
@@ -71,11 +99,19 @@ export function ImageComparisonSlider({
   return (
     <GestureDetector gesture={pan}>
       <View
+        accessible
+        accessibilityRole="adjustable"
+        accessibilityLabel="Image comparison"
+        accessibilityValue={{ min: 0, max: 100, now: splitPercent }}
+        accessibilityState={{ disabled: !enabled }}
+        accessibilityActions={enabled ? [{ name: "increment" }, { name: "decrement" }] : []}
+        onAccessibilityAction={onAccessibilityAction}
         style={[styles.root, style, { borderRadius, overflow: "visible" }]}
         onLayout={(e) => onLayoutWidth(e.nativeEvent.layout.width)}>
         <View style={[styles.media, { borderRadius }]}>
           <Image
             {...afterImageProps}
+            accessible={false}
             source={after}
             contentFit={contentFit}
             style={styles.fullImage}
@@ -85,6 +121,7 @@ export function ImageComparisonSlider({
               {measuredWidth > 0 && (
                 <Image
                   {...beforeImageProps}
+                  accessible={false}
                   source={before}
                   contentFit={contentFit}
                   style={[styles.leftImage, { width: measuredWidth }]}
