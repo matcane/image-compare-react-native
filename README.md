@@ -1,13 +1,13 @@
-# expo-image-comparison-slider
+# @matcane/image-comparison-slider-react-native
 
-Before/after image comparison slider for React Native.
+Before/after image comparison slider for React Native and Expo.
 
 ![Demo](./docs/demo.gif)
 
 ## Install
 
 ```sh
-pnpm add expo-image-comparison-slider expo-image react-native-reanimated react-native-gesture-handler react-native-worklets
+pnpm add @matcane/image-comparison-slider-react-native expo-image react-native-reanimated react-native-gesture-handler react-native-worklets
 ```
 
 Peer dependencies: `react`, `react-native`, `expo-image`, `react-native-reanimated`, `react-native-gesture-handler`, `react-native-worklets`.
@@ -15,7 +15,7 @@ Peer dependencies: `react`, `react-native`, `expo-image`, `react-native-reanimat
 ## Usage
 
 ```tsx
-import { ImageComparisonSlider } from "expo-image-comparison-slider";
+import { ImageComparisonSlider } from "@matcane/image-comparison-slider-react-native";
 import { StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
 
 ## License
 
-MIT License.
+MIT.

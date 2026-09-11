@@ -1,4 +1,4 @@
-import { ImageComparisonSlider } from "expo-image-comparison-slider";
+import { ImageComparisonSlider } from "@matcane/image-comparison-slider-react-native";
 import { StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 

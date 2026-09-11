@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-image-comparison-slider-example",
-    "slug": "expo-image-comparison-slider-example",
+    "name": "image-comparison-slider-example",
+    "slug": "image-comparison-slider-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
