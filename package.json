@@ -1,6 +1,6 @@
 {
   "name": "@matcane/image-comparison-slider-react-native",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Before/after image comparison slider for React Native and Expo",
   "license": "MIT",
   "repository": {
