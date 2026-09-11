@@ -14,13 +14,17 @@
   },
   "files": [
     "src",
-    "lib"
+    "lib",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx",
+    "!lib/**/*.test.js",
+    "!lib/**/*.test.js.map"
   ],
   "scripts": {
     "prepare": "bob build",
     "release": "release-it",
     "dev": "pnpm --filter example start",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -61,6 +65,7 @@
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
+    "exclude": "**/*.{test.ts,test.tsx}",
     "targets": [
       [
         "module",

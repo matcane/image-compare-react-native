@@ -99,6 +99,7 @@ export function ImageComparisonSlider({
   return (
     <GestureDetector gesture={pan}>
       <View
+        role="slider"
         accessible
         accessibilityRole="adjustable"
         accessibilityLabel="Image comparison"
