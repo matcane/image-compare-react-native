@@ -1,12 +1,22 @@
 {
-  "name": "expo-image-comparison-slider",
+  "name": "@matcane/image-comparison-slider-react-native",
   "version": "0.0.0",
+  "description": "Before/after image comparison slider for React Native and Expo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matcane/image-comparison-slider-react-native.git"
+  },
+  "homepage": "https://github.com/matcane/image-comparison-slider-react-native#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "pnpm@11.8.0",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
     ".": {
-      "expo-image-comparison-slider-source": "./src/index.ts",
+      "image-comparison-slider-react-native-source": "./src/index.ts",
       "types": "./lib/typescript/src/index.d.ts",
       "default": "./lib/module/index.js"
     },
