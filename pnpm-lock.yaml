@@ -104,7 +104,7 @@ importers:
 
   example:
     dependencies:
-      '@matcane/image-comparison-slider-react-native':
+      '@image-compare/react-native':
         specifier: workspace:*
         version: link:..
       expo:

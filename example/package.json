@@ -11,7 +11,7 @@
   "dependencies": {
     "expo": "catalog:",
     "expo-image": "catalog:",
-    "@matcane/image-comparison-slider-react-native": "workspace:*",
+    "@image-compare/react-native": "workspace:*",
     "react": "catalog:",
     "react-native": "catalog:",
     "react-native-gesture-handler": "catalog:",
