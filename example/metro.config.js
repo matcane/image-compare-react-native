@@ -15,7 +15,7 @@ const config = withMetroConfig(getDefaultConfig(__dirname), {
   root,
   dirname: __dirname,
   workspaces: ["example"],
-  conditions: ["image-comparison-slider-react-native-source"],
+  conditions: ["image-compare-react-native-source"],
 });
 
 module.exports = config;

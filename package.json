@@ -1,16 +1,22 @@
 {
-  "name": "@matcane/image-comparison-slider-react-native",
+  "name": "@image-compare/react-native",
   "version": "0.1.0",
   "description": "Before/after image comparison slider for React Native and Expo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matcane/image-comparison-slider-react-native.git"
+    "url": "git+https://github.com/matcane/image-compare-react-native.git"
   },
-  "homepage": "https://github.com/matcane/image-comparison-slider-react-native#readme",
+  "homepage": "https://github.com/matcane/image-compare-react-native#readme",
   "bugs": {
-    "url": "https://github.com/matcane/image-comparison-slider-react-native/issues"
+    "url": "https://github.com/matcane/image-compare-react-native/issues"
   },
+  "keywords": [
+    "image-comparison-slider",
+    "before-after",
+    "expo",
+    "react-native"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -19,7 +25,7 @@
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
     ".": {
-      "image-comparison-slider-react-native-source": "./src/index.ts",
+      "image-compare-react-native-source": "./src/index.ts",
       "types": "./lib/typescript/src/index.d.ts",
       "default": "./lib/module/index.js"
     },
