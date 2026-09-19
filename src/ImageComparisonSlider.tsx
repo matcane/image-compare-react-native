@@ -1,21 +1,10 @@
 import { Image, type ImageProps, type ImageSource } from "expo-image";
-import { useCallback, useState, type ReactNode } from "react";
-import {
-  StyleSheet,
-  View,
-  type AccessibilityActionEvent,
-  type StyleProp,
-  type ViewStyle,
-} from "react-native";
+import { type ReactNode } from "react";
+import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
-import Animated, {
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-} from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useDerivedValue } from "react-native-reanimated";
 
-import { createSliderPan } from "./createSliderPan";
-import { clampInitialRatio, clampNextRatio, EDGE_MARGIN, ratioToPercent } from "./utils";
+import { useComparisonSlider } from "./useComparisonSlider";
 
 const HANDLE_KNOB = 40;
 const LINE_WIDTH = 3;
@@ -76,44 +65,15 @@ export function ImageComparisonSlider({
   beforeImageProps,
   afterImageProps,
 }: ImageComparisonSliderProps) {
-  const [measuredWidth, setMeasuredWidth] = useState(0);
-  const containerWidth = useSharedValue(0);
-
-  const initialRatio = clampInitialRatio(initialPosition);
-  const initialPercent = ratioToPercent(initialRatio);
-  const splitRatio = useSharedValue(initialRatio);
-  const [splitPercent, setSplitPercent] = useState(initialPercent);
-
-  const onLayoutWidth = useCallback(
-    (width: number) => {
-      if (width <= 0) return;
-
-      containerWidth.set(width);
-      setMeasuredWidth(width);
-    },
-    [containerWidth],
-  );
-
-  const onAccessibilityAction = useCallback(
-    (event: AccessibilityActionEvent) => {
-      if (!enabled) return;
-
-      const { actionName } = event.nativeEvent;
-      if (actionName !== "increment" && actionName !== "decrement") return;
-
-      const nextRatio = clampNextRatio(
-        (splitRatio.get() + (actionName === "increment" ? 0.05 : -0.05)) * measuredWidth,
-        measuredWidth,
-        EDGE_MARGIN,
-      );
-
-      splitRatio.set(nextRatio);
-      setSplitPercent(ratioToPercent(nextRatio));
-    },
-    [enabled, measuredWidth, splitRatio],
-  );
-
-  const pan = createSliderPan(containerWidth, splitRatio, enabled);
+  const {
+    measuredWidth,
+    containerWidth,
+    splitPercent,
+    splitRatio,
+    pan,
+    onLayoutWidth,
+    onAccessibilityAction,
+  } = useComparisonSlider(initialPosition, enabled);
 
   const splitPx = useDerivedValue(() => splitRatio.get() * containerWidth.get());
 
