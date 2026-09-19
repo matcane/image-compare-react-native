@@ -22,20 +22,47 @@ const LINE_WIDTH = 3;
 
 type PassThroughImageProps = Omit<ImageProps, "source" | "style" | "contentFit">;
 
+/** Props for {@link ImageComparisonSlider}. */
 export interface ImageComparisonSliderProps {
+  /** Revealed image */
   before: ImageSource | number;
+
+  /** Background image */
   after: ImageSource | number;
+
+  /** Split ratio, 0–1 */
   initialPosition?: number;
-  contentFit?: ImageProps["contentFit"];
+
+  /** Comparison UI and gestures */
   enabled?: boolean;
+
+  /** Both images */
+  contentFit?: ImageProps["contentFit"];
+
+  /** Image stack corners */
   borderRadius?: number;
+
+  /** Root container */
   style?: StyleProp<ViewStyle>;
+
+  /** Knob children */
   knobContent?: ReactNode;
+
+  /** Divider line */
   renderLine?: ReactNode;
+
+  /** before (expo-image, minus source / style / contentFit) */
   beforeImageProps?: PassThroughImageProps;
+
+  /** after */
   afterImageProps?: PassThroughImageProps;
 }
 
+/**
+ * Before/after image comparison slider for React Native and Expo.
+ *
+ * @see {@link ImageComparisonSliderProps}
+ */
 export function ImageComparisonSlider({
   before,
   after,
