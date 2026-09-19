@@ -1,9 +1,6 @@
-export const EDGE_MARGIN = 8;
+import { clamp } from "react-native-reanimated";
 
-export function clamp(value: number, min: number, max: number) {
-  "worklet";
-  return Math.min(Math.max(value, min), max);
-}
+export const EDGE_MARGIN = 8;
 
 export function clampInitialRatio(value: number) {
   "worklet";
