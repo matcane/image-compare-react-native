@@ -10,7 +10,7 @@ Before/after image comparison slider for React Native and Expo.
 pnpm add @image-compare/react-native expo-image react-native-reanimated react-native-gesture-handler react-native-worklets
 ```
 
-Peer dependencies: `react`, `react-native`, `expo-image`, `react-native-reanimated`, `react-native-gesture-handler`, `react-native-worklets`.
+Requires React Native 0.78+ (New Architecture), Reanimated 4, Gesture Handler 2.20+, `react-native-worklets`, and `expo-image`.
 
 ## Usage
 
