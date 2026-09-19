@@ -5,7 +5,7 @@ import { useSharedValue } from "react-native-reanimated";
 import { createSliderPan } from "./createSliderPan";
 import { clampInitialRatio, clampNextRatio, EDGE_MARGIN, ratioToPercent } from "./utils";
 
-export function useSlider(initialPosition: number, enabled: boolean) {
+export function useComparisonSlider(initialPosition: number, enabled: boolean) {
   const [measuredWidth, setMeasuredWidth] = useState(0);
   const containerWidth = useSharedValue(0);
 
