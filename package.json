@@ -1,7 +1,7 @@
 {
   "name": "@image-compare/react-native",
   "version": "0.1.0",
-  "description": "Before/after image comparison slider for React Native and Expo",
+  "description": "Before/after image comparison slider for React Native and Expo, with a customizable handle.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,10 +12,14 @@
     "url": "https://github.com/matcane/image-compare-react-native/issues"
   },
   "keywords": [
+    "react-native",
+    "expo",
+    "image-comparison",
     "image-comparison-slider",
     "before-after",
-    "expo",
-    "react-native"
+    "before-after-slider",
+    "comparison-slider",
+    "image-slider"
   ],
   "publishConfig": {
     "access": "public"
