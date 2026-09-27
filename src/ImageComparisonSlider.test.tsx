@@ -75,6 +75,8 @@ describe("ImageComparisonSlider", () => {
       renderLine: <Text>Custom line</Text>,
       beforeImageProps: { testID: "before-image" },
       afterImageProps: { testID: "after-image" },
+      beforeLabel: "Before",
+      afterLabel: "After",
     });
 
     expect(getSlider()).toHaveProp("accessibilityState", { disabled: true });
@@ -83,6 +85,8 @@ describe("ImageComparisonSlider", () => {
     expect(screen.queryByTestId("before-image")).toBeNull();
     expect(screen.queryByText("Custom knob")).toBeNull();
     expect(screen.queryByText("Custom line")).toBeNull();
+    expect(screen.queryByText("Before")).toBeNull();
+    expect(screen.queryByText("After")).toBeNull();
   });
 
   it("renders custom knob and line content", async () => {
@@ -131,5 +135,35 @@ describe("ImageComparisonSlider", () => {
     await fireAccessibilityAction("increment");
 
     expect(getSlider()).toHaveProp("accessibilityValue", { min: 0, max: 100, now: 50 });
+  });
+
+  it("does not render labels by default", async () => {
+    await renderSlider();
+
+    expect(screen.queryByTestId("before-label")).toBeNull();
+    expect(screen.queryByTestId("after-label")).toBeNull();
+  });
+
+  it("renders before and after labels when provided", async () => {
+    await renderSlider({ beforeLabel: "Before", afterLabel: "After" });
+    await layoutSlider();
+
+    expect(screen.getByText("Before")).toBeOnTheScreen();
+    expect(screen.getByText("After")).toBeOnTheScreen();
+  });
+
+  it("renders only the before label", async () => {
+    await renderSlider({ beforeLabel: "Before" });
+    await layoutSlider();
+
+    expect(screen.getByText("Before")).toBeOnTheScreen();
+    expect(screen.queryByTestId("after-label")).toBeNull();
+  });
+
+  it("renders only the after label", async () => {
+    await renderSlider({ afterLabel: "After" });
+
+    expect(screen.getByText("After")).toBeOnTheScreen();
+    expect(screen.queryByTestId("before-label")).toBeNull();
   });
 });
