@@ -8,7 +8,9 @@ export default function App() {
       <View style={styles.container}>
         <ImageComparisonSlider
           before={require("./assets/android-icon-background.png")}
+          beforeLabel="Before"
           after={require("./assets/android-icon-foreground.png")}
+          afterLabel="After"
           borderRadius={16}
           style={{ width: 200, height: 300, backgroundColor: "black" }}
           knobContent={<View style={{ backgroundColor: "red", flex: 1, width: "100%" }} />}
@@ -16,7 +18,9 @@ export default function App() {
 
         <ImageComparisonSlider
           before={require("./assets/android-icon-background.png")}
+          beforeLabel="Before"
           after={require("./assets/android-icon-foreground.png")}
+          afterLabel="After"
           borderRadius={16}
           style={{ width: 200, height: 300, backgroundColor: "black" }}
           knobContent={<View style={{ backgroundColor: "red", flex: 1, width: "100%" }} />}
