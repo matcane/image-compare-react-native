@@ -44,6 +44,12 @@ export interface ImageComparisonSliderProps {
 
   /** after */
   afterImageProps?: PassThroughImageProps;
+
+  /** Label on the before image */
+  beforeLabel?: string;
+
+  /** LAbel on the after image */
+  afterLabel?: string;
 }
 
 /**
