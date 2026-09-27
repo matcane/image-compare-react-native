@@ -5,11 +5,12 @@ import { EDGE_MARGIN } from "./utils";
 interface LabelProps {
   text: string;
   alignSelf?: ViewStyle["alignSelf"];
+  testID?: string;
 }
 
-export function Label({ text, alignSelf = "flex-end" }: LabelProps) {
+export function Label({ text, alignSelf = "flex-end", testID }: LabelProps) {
   return (
-    <View style={[styles.badge, { alignSelf }]}>
+    <View testID={testID} style={[styles.badge, { alignSelf }]}>
       <Text style={styles.text}>{text}</Text>
     </View>
   );

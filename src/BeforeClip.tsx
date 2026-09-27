@@ -33,7 +33,7 @@ export function BeforeClip(props: BeforeClipProps) {
           />
           {beforeLabel && (
             <View style={{ width: measuredWidth }}>
-              <Label text={beforeLabel} alignSelf="flex-start" />
+              <Label text={beforeLabel} alignSelf="flex-start" testID="before-label" />
             </View>
           )}
         </>

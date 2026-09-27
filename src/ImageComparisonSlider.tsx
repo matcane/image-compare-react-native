@@ -106,7 +106,7 @@ export function ImageComparisonSlider({
             contentFit={contentFit}
             style={styles.fullImage}
           />
-          {afterLabel && enabled && <Label text={afterLabel} />}
+          {afterLabel && enabled && <Label text={afterLabel} testID="after-label" />}
           {enabled && (
             <BeforeClip
               source={before}
