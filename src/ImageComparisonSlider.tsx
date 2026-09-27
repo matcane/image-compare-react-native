@@ -49,7 +49,7 @@ export interface ImageComparisonSliderProps {
   /** Label on the before image */
   beforeLabel?: string;
 
-  /** LAbel on the after image */
+  /** Label on the after image */
   afterLabel?: string;
 }
 
