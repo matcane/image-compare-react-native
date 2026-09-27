@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.2.0](https://github.com/matcane/image-compare-react-native/compare/v0.1.0...v0.2.0) (2026-09-27)
+
+### Features
+
+* **slider:** add before and after labels ([#22](https://github.com/matcane/image-compare-react-native/issues/22)) ([6d7a8b0](https://github.com/matcane/image-compare-react-native/commit/6d7a8b0d5c3d4740de42c65f296fe43c96e3b553))
+
 # 0.1.0 (2026-09-11)
 
 ### Features
