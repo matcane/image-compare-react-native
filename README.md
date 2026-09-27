@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
 | `renderLine` | `ReactNode` | — | Divider line |
 | `beforeImageProps` | `PassThroughImageProps` | — | `before` (`expo-image`, minus `source` / `style` / `contentFit`) |
 | `afterImageProps` | `PassThroughImageProps` | — | `after` |
+| `beforeLabel` | `string` | — | `Label on the before image` |
+| `afterLabel` | `string` | — | `Label on the after image` |
 
 ## License
 

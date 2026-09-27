@@ -6,6 +6,7 @@ import { useDerivedValue } from "react-native-reanimated";
 
 import { BeforeClip } from "./BeforeClip";
 import { Handle } from "./Handle";
+import { Label } from "./Label";
 import { useComparisonSlider } from "./useComparisonSlider";
 
 type PassThroughImageProps = Omit<ImageProps, "source" | "style" | "contentFit">;
@@ -44,6 +45,12 @@ export interface ImageComparisonSliderProps {
 
   /** after */
   afterImageProps?: PassThroughImageProps;
+
+  /** Label on the before image */
+  beforeLabel?: string;
+
+  /** Label on the after image */
+  afterLabel?: string;
 }
 
 /**
@@ -63,6 +70,8 @@ export function ImageComparisonSlider({
   renderLine,
   beforeImageProps,
   afterImageProps,
+  beforeLabel,
+  afterLabel,
 }: ImageComparisonSliderProps) {
   const {
     measuredWidth,
@@ -97,6 +106,7 @@ export function ImageComparisonSlider({
             contentFit={contentFit}
             style={styles.fullImage}
           />
+          {afterLabel && enabled && <Label text={afterLabel} testID="after-label" />}
           {enabled && (
             <BeforeClip
               source={before}
@@ -104,6 +114,7 @@ export function ImageComparisonSlider({
               imageProps={beforeImageProps}
               splitPx={splitPx}
               measuredWidth={measuredWidth}
+              beforeLabel={beforeLabel}
             />
           )}
         </View>
