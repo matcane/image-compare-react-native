@@ -6,8 +6,8 @@ import { createSliderPan } from "./createSliderPan";
 import { clampInitialRatio, clampNextRatio, EDGE_MARGIN, ratioToPercent } from "./utils";
 
 export function useComparisonSlider(initialPosition: number, enabled: boolean) {
-  const [measuredWidth, setMeasuredWidth] = useState(0);
-  const containerWidth = useSharedValue(0);
+  const [layoutContainerWidth, setLayoutContainerWidth] = useState(0);
+  const sharedContainerWidth = useSharedValue(0);
 
   const initialRatio = clampInitialRatio(initialPosition);
   const initialPercent = ratioToPercent(initialRatio);
@@ -18,10 +18,10 @@ export function useComparisonSlider(initialPosition: number, enabled: boolean) {
     (width: number) => {
       if (width <= 0) return;
 
-      containerWidth.set(width);
-      setMeasuredWidth(width);
+      sharedContainerWidth.set(width);
+      setLayoutContainerWidth(width);
     },
-    [containerWidth],
+    [sharedContainerWidth],
   );
 
   const onAccessibilityAction = useCallback(
@@ -32,22 +32,22 @@ export function useComparisonSlider(initialPosition: number, enabled: boolean) {
       if (actionName !== "increment" && actionName !== "decrement") return;
 
       const nextRatio = clampNextRatio(
-        (splitRatio.get() + (actionName === "increment" ? 0.05 : -0.05)) * measuredWidth,
-        measuredWidth,
+        (splitRatio.get() + (actionName === "increment" ? 0.05 : -0.05)) * layoutContainerWidth,
+        layoutContainerWidth,
         EDGE_MARGIN,
       );
 
       splitRatio.set(nextRatio);
       setSplitPercent(ratioToPercent(nextRatio));
     },
-    [enabled, measuredWidth, splitRatio],
+    [enabled, layoutContainerWidth, splitRatio],
   );
 
-  const pan = createSliderPan(containerWidth, splitRatio, enabled);
+  const pan = createSliderPan(sharedContainerWidth, splitRatio, enabled);
 
   return {
-    measuredWidth,
-    containerWidth,
+    layoutContainerWidth,
+    sharedContainerWidth,
     splitPercent,
     splitRatio,
     pan,
