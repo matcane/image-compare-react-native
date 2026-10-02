@@ -7,7 +7,7 @@ const PAN_ACTIVE_OFFSET_X = [-0, 0] as [activeOffsetXStart: number, activeOffset
 const PAN_FAIL_OFFSET_Y = [-18, 18] as [failOffsetYStart: number, failOffsetYEnd: number];
 
 export function createSliderPan(
-  containerWidth: SharedValue<number>,
+  sharedContainerWidth: SharedValue<number>,
   splitRatio: SharedValue<number>,
   enabled: boolean,
 ) {
@@ -16,7 +16,7 @@ export function createSliderPan(
     .activeOffsetX(PAN_ACTIVE_OFFSET_X)
     .failOffsetY(PAN_FAIL_OFFSET_Y)
     .onUpdate((e) => {
-      const width = containerWidth.get();
+      const width = sharedContainerWidth.get();
       if (width <= 0) return;
 
       const nextRatio = clampNextRatio(e.x, width, EDGE_MARGIN);

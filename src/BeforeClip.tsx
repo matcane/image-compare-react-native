@@ -10,29 +10,29 @@ interface BeforeClipProps {
   source: ImageSource | number;
   contentFit?: ImageProps["contentFit"];
   imageProps?: PassThroughImageProps;
-  measuredWidth: number;
+  layoutContainerWidth: number;
   splitPx: DerivedValue<number>;
   beforeLabel?: string;
 }
 
 export function BeforeClip(props: BeforeClipProps) {
-  const { measuredWidth, splitPx, source, contentFit, imageProps, beforeLabel } = props;
+  const { layoutContainerWidth, splitPx, source, contentFit, imageProps, beforeLabel } = props;
 
   const clipStyle = useAnimatedStyle(() => ({ width: splitPx.get() }));
 
   return (
     <Animated.View style={[styles.clip, clipStyle]}>
-      {measuredWidth > 0 && (
+      {layoutContainerWidth > 0 && (
         <>
           <Image
             {...imageProps}
             accessible={false}
             source={source}
             contentFit={contentFit}
-            style={[styles.leftImage, { width: measuredWidth }]}
+            style={[styles.leftImage, { width: layoutContainerWidth }]}
           />
           {beforeLabel && (
-            <View style={{ width: measuredWidth }}>
+            <View style={{ width: layoutContainerWidth }}>
               <Label text={beforeLabel} alignSelf="flex-start" testID="before-label" />
             </View>
           )}

@@ -74,8 +74,8 @@ export function ImageComparisonSlider({
   afterLabel,
 }: ImageComparisonSliderProps) {
   const {
-    measuredWidth,
-    containerWidth,
+    layoutContainerWidth,
+    sharedContainerWidth,
     splitPercent,
     splitRatio,
     pan,
@@ -83,7 +83,7 @@ export function ImageComparisonSlider({
     onAccessibilityAction,
   } = useComparisonSlider(initialPosition, enabled);
 
-  const splitPx = useDerivedValue(() => splitRatio.get() * containerWidth.get());
+  const splitPx = useDerivedValue(() => splitRatio.get() * sharedContainerWidth.get());
 
   return (
     <GestureDetector gesture={pan}>
@@ -113,7 +113,7 @@ export function ImageComparisonSlider({
               contentFit={contentFit}
               imageProps={beforeImageProps}
               splitPx={splitPx}
-              measuredWidth={measuredWidth}
+              layoutContainerWidth={layoutContainerWidth}
               beforeLabel={beforeLabel}
             />
           )}
