@@ -22,21 +22,17 @@ export function BeforeClip(props: BeforeClipProps) {
 
   return (
     <Animated.View style={[styles.clip, clipStyle]}>
-      {layoutContainerWidth > 0 && (
-        <>
-          <Image
-            {...imageProps}
-            accessible={false}
-            source={source}
-            contentFit={contentFit}
-            style={[styles.leftImage, { width: layoutContainerWidth }]}
-          />
-          {beforeLabel && (
-            <View style={{ width: layoutContainerWidth }}>
-              <Label text={beforeLabel} alignSelf="flex-start" testID="before-label" />
-            </View>
-          )}
-        </>
+      <Image
+        {...imageProps}
+        accessible={false}
+        source={source}
+        contentFit={contentFit}
+        style={[styles.leftImage, { width: layoutContainerWidth }]}
+      />
+      {beforeLabel && (
+        <View style={{ width: layoutContainerWidth }}>
+          <Label text={beforeLabel} alignSelf="flex-start" testID="before-label" />
+        </View>
       )}
     </Animated.View>
   );
